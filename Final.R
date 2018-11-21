@@ -27,3 +27,11 @@ df[12778,6] <- 'BRN'
 df[14247,6] <- 'CAN'
 df[14266,6] <- 'KOR'
 df[14285,6] <- 'RUS'
+
+# Converting all the team events to one 
+# If there are 2 golds in a row, which means it was a team, just keep one of those, rest=NA
+for(i in 1:nrow(df)){
+  ifelse(df$Medal[i]==df$Medal[i+1],df$Medal[i]<-NA,i<=i)
+}
+df <- na.omit(df)
+df <- df[,c(-2,-3,-6)]
